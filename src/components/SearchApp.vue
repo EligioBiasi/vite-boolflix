@@ -1,7 +1,9 @@
 <template>
-    <nav>
-        
-    </nav>
+    <div class="flex">
+        <div class="film-card" v-for="film in FilmList">
+            {{ film.original_title }}
+        </div>
+    </div>
 </template>
 
 <script>
@@ -26,5 +28,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    
+    div.film-card{
+        width: calc((100%/5) - 1.14rem);
+        height: 200px;
+        border: solid black 1px;
+        margin: 0.5rem;
+    }
+
+    div.flex{
+        display: flex;
+        flex-wrap: wrap;
+    }
 </style>

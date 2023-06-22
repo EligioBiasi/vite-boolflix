@@ -13,7 +13,7 @@
                 </p>
 
                 <p>
-                    {{ film.original_language}}
+                    <country-flag country='it' size='big'/>
                 </p>
 
                 <p>

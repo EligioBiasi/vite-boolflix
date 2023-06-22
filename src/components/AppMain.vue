@@ -1,59 +1,60 @@
 <template>
     <div class="container">
-        <SearchApp @addMessage="apiCall"/>
+      <SearchApp @addMessage="apiCall" />
+  
+      <div class="flex">
+            <div class="film-card" v-for="film in FilmList" :key="film.id">
 
-        <div class="flex">
-            <div class="film-card" v-for="film in FilmList">
                 <h3>
-                    {{ film.title}}
+                    {{ film.title }}
                 </h3>
-
+                
                 <p>
-                    {{ film.original_title}}
+                    {{ film.original_title }}
                 </p>
 
-                <p>
-                    <country-flag country='it' size='big'/>
-                </p>
+                <img :src="getFlagUrl(film.original_language)" :alt="film.original_language">
 
                 <p>
                     {{ film.vote_average.toFixed(0) }}
                 </p>
             </div>
-        </div>
+      </div>
     </div>
-</template>
-
-<script>
-import SearchApp from './SearchApp.vue';
-import axios from 'axios';
-
-export default {
-    name:'AppMain',
-
-    data(){
-        return{
-            ApiUrl: 'https://api.themoviedb.org/3/search/movie?api_key=6b2e78461e0d04629d8506dcedd436c4&query=',
-            FilmList : [],
-        }
+  </template>
+  
+  <script>
+  import SearchApp from './SearchApp.vue';
+  import axios from 'axios';
+  
+  export default {
+    name: 'AppMain',
+    data() {
+      return {
+        ApiUrl: 'https://api.themoviedb.org/3/search/movie?api_key=6b2e78461e0d04629d8506dcedd436c4&query=',
+        FilmList: [],
+      };
     },
-
-    components:{
-        SearchApp,
+    components: {
+      SearchApp,
     },
-
-    methods:{
-        apiCall(call){
-            axios.get(this.ApiUrl + call)
-                .then( (response) => {
-                    this.FilmList = response.data.results;
-                });
-        }
+    methods: {
+      apiCall(call) {
+        axios.get(this.ApiUrl + call)
+          .then((response) => {
+            this.FilmList = response.data.results;
+          });
+      },
+      
+      getFlagUrl(isoCode) {
+        const baseUrl = '../image/';
+        const flagFileName = `${isoCode.toLowerCase()}.png`; 
+      },
+      
     },
-    
-
-}
-</script>
+ };
+  </script>
+  
 
 <style lang="scss" scoped>
     div.container{

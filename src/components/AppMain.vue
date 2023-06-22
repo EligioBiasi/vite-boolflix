@@ -78,10 +78,10 @@
       getFlagUrl(isoCode) {
         const flagFileName = `${isoCode.toLowerCase()}.png`;
 
-        if(`${isoCode.toLowerCase()}.png` == `../image/${flagFileName}`){
-            return (`../image/${flagFileName}`);
+        if(`${isoCode}.png` == `../public/image/it.png`){
+            return (`../public/image/it.png`);
         }else{
-            return (`${isoCode.toLowerCase()}`);
+            return (``);
         }
       },
     },

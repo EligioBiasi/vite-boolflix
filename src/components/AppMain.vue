@@ -4,7 +4,6 @@
   
       <div class="flex">
             <div class="film-card" v-for="film in FilmList" :key="film.id">
-
                 <h3>
                     {{ film.title }}
                 </h3>
@@ -45,16 +44,13 @@
             this.FilmList = response.data.results;
           });
       },
-      
       getFlagUrl(isoCode) {
-        const baseUrl = '../image/';
         const flagFileName = `${isoCode.toLowerCase()}.png`; 
+        return (`../image/${flagFileName}`);
       },
-      
     },
- };
+  };
   </script>
-  
 
 <style lang="scss" scoped>
     div.container{

@@ -7,7 +7,7 @@
                 <h3>
                     {{ film.title }}
                 </h3>
-                
+
                 <p>
                     {{ film.original_title }}
                 </p>
@@ -45,8 +45,13 @@
           });
       },
       getFlagUrl(isoCode) {
-        const flagFileName = `${isoCode.toLowerCase()}.png`; 
-        return (`../image/${flagFileName}`);
+        const flagFileName = `${isoCode.toLowerCase()}.png`;
+
+        if(`${isoCode.toLowerCase()}.png` === `../image/${flagFileName}`){
+            return (`../image/${flagFileName}`);
+        }else{
+            return (`${isoCode.toLowerCase()}`);
+        }
       },
     },
   };

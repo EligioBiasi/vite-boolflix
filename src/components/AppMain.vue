@@ -5,25 +5,29 @@
           Film
       </h1>
       <div class="flex">
-            <div class="film-card" v-for="film in FilmList" :key="film.id">
-                <h3>
-                    {{ film.title }}
-                </h3>
 
-                <p>
-                    {{ film.original_title }}
-                    
-                </p>
+        <div class="film-card" v-for="film in FilmList" :key="film.id">
 
-                <img v-if="languageFlagAppear(film.original_language)" :src="getImagePath(film.original_language)" alt="">
+          <img :src="this.PosterUrl + film.poster_path" alt="#" class="poster-img">
+          
+          <h3>
+              {{ film.title }}
+          </h3>
 
-                <span v-else="">
-                  {{ film.original_language }}
-                </span>
-                <p>
-                    {{ film.vote_average.toFixed(0) }}
-                </p>
-            </div>
+          <p>
+              {{ film.original_title }}
+              
+          </p>
+
+          <img v-if="languageFlagAppear(film.original_language)" :src="getImagePath(film.original_language)" alt="" class="flag">
+
+          <span v-else="">
+            {{ film.original_language }}
+          </span>
+          <p>
+              {{ film.vote_average.toFixed(0) }}
+          </p>
+        </div>
       </div>
       
       <div>
@@ -32,6 +36,10 @@
         </h1>
         <div class="flex">
             <div class="film-card" v-for="series in seriesList">
+
+          <img :src="this.PosterUrl + series.poster_path" alt="#" class="poster-img">
+
+
                 <h3>
                     {{ series.name }}
                 </h3>
@@ -40,7 +48,7 @@
                     {{ series.original_name }}
                 </p>
                 
-                <img v-if="languageFlagAppear(series.original_language)" :src="getImagePath(series.original_language)" alt="">
+                <img v-if="languageFlagAppear(series.original_language)" :src="getImagePath(series.original_language)" alt="" class="flag">
                 
                 <span v-else="">
                   {{ series.original_language }}
@@ -68,6 +76,7 @@
         FlagList:['it.png','en.png','ja.png','pt.png','es.png','fr.png' ],
         ApiUrl: 'https://api.themoviedb.org/3/search/movie?api_key=6b2e78461e0d04629d8506dcedd436c4&query=',
         ApiSeriesUrl: 'https://api.themoviedb.org/3/search/tv?api_key=6b2e78461e0d04629d8506dcedd436c4&query=',
+        PosterUrl:'https://image.tmdb.org/t/p/w500/',
         itflag: `../public/image/it.png`,
 
       };
@@ -76,7 +85,7 @@
       SearchApp,
     },
     methods: {
-      apiCall(call) {
+      apiCall(call, PosterLocation) {
         axios.get(this.ApiUrl + call)
           .then((response) => {
             this.FilmList = response.data.results;
@@ -110,11 +119,10 @@
     }
 
     div.film-card{
-        width: calc((100%/5) - 1.63rem);
+        width: calc((100%/5) - 0.63rem);
         border: solid black 1px;
         margin-right: 0.5rem;
         margin-bottom: 0.5rem;
-        padding: 0 .5rem;
     }
 
     div.flex{
@@ -122,7 +130,15 @@
         flex-wrap: wrap;
     }
 
-    img{
+    img.flag{
       width: 35px;
+    }
+
+    img.poster-img{
+      width: 100%;
+    }
+
+    .padding-5{
+      padding: 0.5rem;
     }
 </style>

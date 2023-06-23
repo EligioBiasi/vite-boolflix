@@ -16,6 +16,7 @@
                 </p>
 
                 <img v-if="languageFlagAppear(film.original_language)" :src="getImagePath(film.original_language)" alt="">
+
                 <span v-else="">
                   {{ film.original_language }}
                 </span>
@@ -38,6 +39,12 @@
                 <p>
                     {{ series.original_name }}
                 </p>
+                
+                <img v-if="languageFlagAppear(series.original_language)" :src="getImagePath(series.original_language)" alt="">
+                
+                <span v-else="">
+                  {{ series.original_language }}
+                </span>
 
                 <p>
                     {{ series.vote_average.toFixed(0) }}
@@ -58,7 +65,7 @@
       return {
         FilmList: [],
         seriesList:[],
-        FlagList:['it.png','us.png','ja.png', ],
+        FlagList:['it.png','en.png','ja.png','pt.png','es.png','fr.png' ],
         ApiUrl: 'https://api.themoviedb.org/3/search/movie?api_key=6b2e78461e0d04629d8506dcedd436c4&query=',
         ApiSeriesUrl: 'https://api.themoviedb.org/3/search/tv?api_key=6b2e78461e0d04629d8506dcedd436c4&query=',
         itflag: `../public/image/it.png`,
@@ -116,6 +123,6 @@
     }
 
     img{
-      width: 40px;
+      width: 35px;
     }
 </style>

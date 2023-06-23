@@ -12,10 +12,13 @@
 
                 <p>
                     {{ film.original_title }}
+                    
                 </p>
 
-                <img :src="getFlagUrl(film.original_language)" :alt="film.original_language">
-
+                <img v-if="languageFlagAppear(film.original_language)" :src="getImagePath(film.original_language)" alt="">
+                <span v-else="">
+                  {{ film.original_language }}
+                </span>
                 <p>
                     {{ film.vote_average.toFixed(0) }}
                 </p>
@@ -53,10 +56,13 @@
     name: 'AppMain',
     data() {
       return {
-        ApiUrl: 'https://api.themoviedb.org/3/search/movie?api_key=6b2e78461e0d04629d8506dcedd436c4&query=',
         FilmList: [],
         seriesList:[],
+        FlagList:['it.png','us.png','ja.png', ],
+        ApiUrl: 'https://api.themoviedb.org/3/search/movie?api_key=6b2e78461e0d04629d8506dcedd436c4&query=',
         ApiSeriesUrl: 'https://api.themoviedb.org/3/search/tv?api_key=6b2e78461e0d04629d8506dcedd436c4&query=',
+        itflag: `../public/image/it.png`,
+
       };
     },
     components: {
@@ -75,15 +81,17 @@
           });
       },
       
-      getFlagUrl(isoCode) {
-        const flagFileName = `${isoCode.toLowerCase()}.png`;
-
-        if(`${isoCode}.png` == `../public/image/it.png`){
-            return (`../public/image/it.png`);
+      languageFlagAppear(lang){
+        if(this.FlagList.includes(lang + '.png')){
+          return true
         }else{
-            return (``);
+          return false
         }
       },
+
+      getImagePath(img){
+        return new URL(`../../public/image/${img}.png`, import.meta.url).href;
+      }
     },
   };
   </script>
@@ -107,4 +115,7 @@
         flex-wrap: wrap;
     }
 
+    img{
+      width: 40px;
+    }
 </style>

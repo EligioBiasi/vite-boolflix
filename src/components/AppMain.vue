@@ -24,9 +24,12 @@
           <span v-else="">
             {{ film.original_language }}
           </span>
-          <p>
-              {{ film.vote_average.toFixed(0) }}
-          </p>
+
+          <div>
+            {{ voteRounder(film.vote_average) }}
+            <font-awesome-icon icon="fa-solid fa-star" style="color: #fbff00;" />
+          </div>
+
         </div>
       </div>
       
@@ -36,10 +39,7 @@
         </h1>
         <div class="flex">
             <div class="film-card" v-for="series in seriesList">
-
-          <img :src="this.PosterUrl + series.poster_path" alt="#" class="poster-img">
-
-
+              <img :src="this.PosterUrl + series.poster_path" alt="#" class="poster-img">
                 <h3>
                     {{ series.name }}
                 </h3>
@@ -54,9 +54,9 @@
                   {{ series.original_language }}
                 </span>
 
-                <p>
-                    {{ series.vote_average.toFixed(0) }}
-                </p>
+                <div>
+                  <font-awesome-icon icon="fa-solid fa-star" style="color: #fbff00;" /> 
+                </div>
             </div>
         </div>
       </div>
@@ -77,7 +77,6 @@
         ApiUrl: 'https://api.themoviedb.org/3/search/movie?api_key=6b2e78461e0d04629d8506dcedd436c4&query=',
         ApiSeriesUrl: 'https://api.themoviedb.org/3/search/tv?api_key=6b2e78461e0d04629d8506dcedd436c4&query=',
         PosterUrl:'https://image.tmdb.org/t/p/w500/',
-        itflag: `../public/image/it.png`,
 
       };
     },
@@ -107,6 +106,10 @@
 
       getImagePath(img){
         return new URL(`../../public/image/${img}.png`, import.meta.url).href;
+      },
+
+      voteRounder(vote){
+        return vote = parseInt(vote / 2);
       }
     },
   };

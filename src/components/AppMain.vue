@@ -26,8 +26,9 @@
           </span>
 
           <div>
-            {{ voteRounder(film.vote_average) }}
-            <font-awesome-icon icon="fa-solid fa-star" style="color: #fbff00;" />
+            <span v-for="color in voteRounder(film.vote_average)" :key="color">
+              <font-awesome-icon icon="fa-solid fa-star" :style="{ color: color }" />
+            </span>
           </div>
 
         </div>
@@ -55,7 +56,9 @@
                 </span>
 
                 <div>
-                  <font-awesome-icon icon="fa-solid fa-star" style="color: #fbff00;" /> 
+                  <span v-for="color in voteRounder(series.vote_average)" :key="color">
+                    <font-awesome-icon icon="fa-solid fa-star" :style="{ color: color }" />
+                  </span>
                 </div>
             </div>
         </div>
@@ -77,6 +80,8 @@
         ApiUrl: 'https://api.themoviedb.org/3/search/movie?api_key=6b2e78461e0d04629d8506dcedd436c4&query=',
         ApiSeriesUrl: 'https://api.themoviedb.org/3/search/tv?api_key=6b2e78461e0d04629d8506dcedd436c4&query=',
         PosterUrl:'https://image.tmdb.org/t/p/w500/',
+        yellowStar:'',
+        greyStar:'',
 
       };
     },
@@ -108,9 +113,20 @@
         return new URL(`../../public/image/${img}.png`, import.meta.url).href;
       },
 
-      voteRounder(vote){
-        return vote = parseInt(vote / 2);
-      }
+      voteRounder(vote) {
+        const roundedVote = Math.round(vote / 2);
+        const starsColor = [];
+
+        for (let i = 0; i < roundedVote; i++) {
+          starsColor.push('#fbff00'); // Colore stella gialla
+        }
+
+        for (let i = roundedVote; i < 5; i++) {
+          starsColor.push('#cccccc'); // Colore stella grigia
+        }
+
+        return starsColor;
+      },
     },
   };
   </script>

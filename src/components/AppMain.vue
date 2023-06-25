@@ -1,7 +1,7 @@
 <template>
-    <div class="container">
-      <SearchApp @addMessage="apiCall" />
-      <h1>
+    <div class="container gray-background">
+      <SearchApp @addMessage="apiCall" class="black-background"/>
+      <h1 class="pink-background">
           Film
       </h1>
       <div class="flex">
@@ -35,7 +35,7 @@
       </div>
       
       <div>
-        <h1>
+        <h1 class="pink-background">
           TV series
         </h1>
         <div class="flex">
@@ -190,5 +190,22 @@
 
     .padding-5{
       padding: 0.5rem;
+    }
+
+    .black-background{
+      background-color: black;
+    }
+
+    .gray-background{
+      background-color: gray;
+    }
+
+    .pink-background{
+      background-color: pink;
+    }
+
+    h1{
+      margin: 0;
+      padding: 1rem 0;
     }
 </style>

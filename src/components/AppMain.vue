@@ -8,7 +8,7 @@
 
         <div class="film-card" v-for="film in FilmList" :key="film.id">
 
-          <img :src="this.PosterUrl + film.poster_path" alt="#" class="poster-img">
+          <img :src="this.PosterUrl + film.poster_path" alt="#" class="poster-img" >
           
           <h3>
               {{ film.title }}
@@ -25,7 +25,7 @@
             {{ film.original_language }}
           </span>
 
-          <div>
+          <div class="star">
             <span v-for="color in voteRounder(film.vote_average)" :key="color">
               <font-awesome-icon icon="fa-solid fa-star" :style="{ color: color }" />
             </span>
@@ -55,7 +55,7 @@
                   {{ series.original_language }}
                 </span>
 
-                <div>
+                <div class="star">
                   <span v-for="color in voteRounder(series.vote_average)" :key="color">
                     <font-awesome-icon icon="fa-solid fa-star" :style="{ color: color }" />
                   </span>
@@ -82,7 +82,7 @@
         PosterUrl:'https://image.tmdb.org/t/p/w500/',
         yellowStar:'',
         greyStar:'',
-
+        seeIt: false,
       };
     },
     components: {
@@ -142,19 +142,50 @@
         border: solid black 1px;
         margin-right: 0.5rem;
         margin-bottom: 0.5rem;
+
+        h3,
+        p,
+        img.flag,
+        span,
+        div.star{
+          display: none;
+        }
+    }
+
+    div.film-card:hover{
+      background-color: red;
+
+        img.poster-img{
+          display: none;
+        }
+        h3,
+        p,
+        img.flag,
+        span{
+          display: block;
+          padding: .5rem;
+        }
+
+        div.star{
+          display: flex;
+          margin-top: 1rem;
+        }
     }
 
     div.flex{
         display: flex;
         flex-wrap: wrap;
     }
-
+    
+    
     img.flag{
       width: 35px;
     }
 
     img.poster-img{
       width: 100%;
+      height: 100%;
+      display: block;
     }
 
     .padding-5{
